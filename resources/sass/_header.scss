@@ -1,0 +1,27 @@
+img{
+    width: 100%;
+    padding: 2%0% 0% 0%;
+}
+ul{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+#perfil{
+    width: 100%;
+    padding: 2% 0%;
+    font-size: 1.3em;
+    text-align: center;
+    background-color: rgb(70, 70, 70);
+    color: white;
+}
+.primer-nivel{
+    width: 100%;
+    padding: 2% 0%;
+    font-size: 1.3em;
+    text-align: center;
+}
+.primer-nivel:hover{
+    background-color: $color-apartado_hover;
+}

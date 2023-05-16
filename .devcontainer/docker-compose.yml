@@ -1,0 +1,21 @@
+services:
+  devcontainer:
+    build:
+      context: .
+      dockerfile: dockerfile
+    tty: true
+    volumes:
+      - ../.:/var/www/html/
+    ports:
+      - 80:80
+      - 9003:9003
+    cpu_count: 3
+  mysql:
+    image: mysql
+    tty: true
+    environment:
+      - MYSQL_ROOT_PASSWORD=paso1234
+    ports:
+      - 3306:3306
+volumes:
+    data:
