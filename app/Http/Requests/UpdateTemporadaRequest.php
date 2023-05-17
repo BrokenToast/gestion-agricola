@@ -11,7 +11,7 @@ class UpdateTemporadaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class UpdateTemporadaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'fecha_fin' => ['date'],
+            'observaciones' => ['string', 'max:500', 'nullable'],
         ];
     }
 }

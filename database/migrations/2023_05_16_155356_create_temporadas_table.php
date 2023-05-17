@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('temporadas', function (Blueprint $table) {
             $table->id();
+            $table->date('fecha_inicio');
+            $table->date('fecha_fin')->nullable();
+            $table->text('observaciones')->nullable();
+            $table->unsignedBigInteger('usuario_id');
+            $table->foreign('usuario_id')->references('id')->on('usuarios');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

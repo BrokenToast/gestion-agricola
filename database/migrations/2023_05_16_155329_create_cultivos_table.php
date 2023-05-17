@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('cultivos', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre')->unique()->max(255);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -43,4 +43,25 @@ class Usuario extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    //==========================================
+    //= Relaciones
+    //==========================================
+    /**
+     * Get the temporada that owns the Usuario
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function temporada(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Temporada::class);
+    }
+    /**
+     * Get the finca that owns the Usuario
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function finca(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Finca::class);
+    }
 }

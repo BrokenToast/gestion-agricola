@@ -13,7 +13,17 @@ return new class extends Migration
     {
         Schema::create('gastos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('tipo_id');
+            $table->foreign('tipo_id')->references('id')->on('tipo_de_gastos');
+            $table->text('descripcion')->nullable();
+            $table->decimal('cantidad');
+            $table->date('fecha');
+            $table->unsignedBigInteger('finca_id');
+            $table->foreign('finca_id')->references('id')->on('fincas');
+            $table->unsignedBigInteger('temporada_id');
+            $table->foreign('temporada_id')->references('id')->on('temporadas');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
