@@ -19,9 +19,9 @@
         <div>
             {!! Form::label('poligono','Numero de poligono', ['class'=>'form-label']) !!}
             {!! Form::number('poligono', old('poligono') ?? $finca->poligono, ['class'=>'form-number']) !!}
-            @error('poligo')
+            @error('poligono')
                 <span class="text-danger" role="alert">
-                    <strong>{{ $errors->messages()['poligo'][0]}}</strong>
+                    <strong>{{ $errors->messages()['poligono'][0]}}</strong>
                 </span>
             @enderror
         </div>

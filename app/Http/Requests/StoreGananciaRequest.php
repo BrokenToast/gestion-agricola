@@ -11,7 +11,7 @@ class StoreGananciaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class StoreGananciaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'comprador' => ['string', 'max:255'],
+            'precio_tonelada' => ['numeric'],
+            'cantidad' => ['numeric'],
+            'fecha' => ['date'],
+            'finca_id' => ['integer'],
+            'temporada_id' => ['integer']
         ];
     }
 }

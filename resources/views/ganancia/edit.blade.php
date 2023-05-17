@@ -3,13 +3,13 @@
 @section('main')
 <div class="card">
     <div class="card-header">
-        Finca create
+        Finca editar
     </div>
     <div class="card-body">
-        {!! Form::open(['method'=>'POST','url'=>route('finca.store')]) !!}
+        {!! Form::open(['method'=>'PUT','url'=>route('finca.update',$finca->id)]) !!}
         <div>
             {!! Form::label('parcela','Numero de parcela', ['class'=>'form-label']) !!}
-            {!! Form::number('parcela', old('parcela'), ['class'=>'form-number']) !!}
+            {!! Form::number('parcela', old('parcela') ?? $finca->parcela, ['class'=>'form-number']) !!}
             @error('parcela')
                 <span class="text-danger" role="alert">
                     <strong>{{ $errors->messages()['parcela'][0]}}</strong>
@@ -18,16 +18,16 @@
         </div>
         <div>
             {!! Form::label('poligono','Numero de poligono', ['class'=>'form-label']) !!}
-            {!! Form::number('poligono', old('poligono'), ['class'=>'form-number']) !!}
-            @error('poligono')
+            {!! Form::number('poligono', old('poligono') ?? $finca->poligono, ['class'=>'form-number']) !!}
+            @error('poligo')
                 <span class="text-danger" role="alert">
-                    <strong>{{ $errors->messages()['poligono'][0]}}</strong>
+                    <strong>{{ $errors->messages()['poligo'][0]}}</strong>
                 </span>
             @enderror
         </div>
         <div>
             {!! Form::label('municipio','Localidad', ['class'=>'form-label']) !!}
-            {!! Form::text('municipio', old('municipio'), ['class'=>'form-text']) !!}
+            {!! Form::text('municipio', old('municipio') ?? $finca->municipio, ['class'=>'form-text']) !!}
             @error('municipio')
                 <span class="text-danger" role="alert">
                     <strong>{{ $errors->messages()['municipio'][0]}}</strong>
@@ -36,7 +36,7 @@
         </div>
         <div>
             {!! Form::label('provincia','Provincia', ['class'=>'form-label']) !!}
-            {!! Form::text('provincia', old('provincia'), ['class'=>'form-text']) !!}
+            {!! Form::text('provincia', old('provincia') ?? $finca->provincia, ['class'=>'form-text']) !!}
             @error('provincia')
                 <span class="text-danger" role="alert">
                     <strong>{{ $errors->messages()['provincia'][0]}}</strong>
@@ -45,16 +45,15 @@
         </div>
         <div>
             {!! Form::label('hectarias','Hectarias', ['class'=>'form-label']) !!}
-            {!! Form::number('hectarias', old('hectarias'), ['class'=>'form-number','step'=>'0.1']) !!}
+            {!! Form::number('hectarias', old('hectarias') ?? $finca->hectarias, ['class'=>'form-number','step'=>'0.1']) !!}
             @error('hectarias')
             <span class="text-danger" role="alert">
                 <strong>{{ $errors->messages()['hectarias'][0]}}</strong>
             </span>
         @enderror
         </div>
-            {!! Form::submit('Crear', ['class'=>'btn btn-success']) !!}
+            {!! Form::submit('Editar', ['class'=>'btn btn-success']) !!}
         {!! Form::close() !!}
     </div>
-
-  </div>
+</div>
 @endsection

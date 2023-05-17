@@ -44,7 +44,7 @@ class Cultivo extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function Finca(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function finca(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Finca::class, 'finca_temporada_cultivo');
     }

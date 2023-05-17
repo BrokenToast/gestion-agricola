@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -65,5 +66,16 @@ class Temporada extends Model
     public function usuario()
     {
         return $this->belongsTo(Usuario::class);
+    }
+    //==========================================
+    //= Accesors
+    //==========================================
+    protected function comiezoFinalTemporada(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                return $this->fecha_inicio->format('Y-m-d') . ' - ' . $this->fecha_fin->format('Y-m-d') . (($this->fecha_fin) ? '(Finalizada)' : '(No finalizada)');
+            },
+        );
     }
 }

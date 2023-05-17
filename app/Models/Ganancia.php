@@ -43,19 +43,19 @@ class Ganancia extends Model
     /**
      * Get the fincas associated with the Ganancia
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return
      */
-    public function fincas(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function finca()
     {
-        return $this->hasOne(Finca::class);
+        return $this->belongsTo(Finca::class);
     }
     /**
      * Get the temporada associated with the Ganancia
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return
      */
-    public function temporada(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function temporada()
     {
-        return $this->hasOne(Temporada::class);
+        return $this->belongsTo(Temporada::class);
     }
 }

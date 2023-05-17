@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -66,11 +67,20 @@ class Finca extends Model
     /**
      * Get the ganancias that owns the Finca
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return
      */
-    public function ganancias(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function ganancia()
     {
-        return $this->belongsTo(Ganancia::class);
+        return $this->hasOne(Ganancia::class);
+    }
+    /**
+     * Get the ganancias that owns the Finca
+     *
+     * @return
+     */
+    public function gastos()
+    {
+        return $this->hasOne(Gastos::class);
     }
     //==========================================
     //= Scopes
@@ -80,5 +90,16 @@ class Finca extends Model
         if ($baja) {
             $query->onlyTrashed();
         }
+    }
+    //==========================================
+    //= Accesors
+    //==========================================
+    protected function identificadores(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                return $this->parcela . '-' . $this->poligono . '-' . $this->municipio . '-' . $this->provincia;
+            },
+        );
     }
 }

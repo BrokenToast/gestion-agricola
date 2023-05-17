@@ -17,27 +17,31 @@
         <table class="table">
             <thead>
               <tr>
-                <th scope="col">Parcela</th>
-                <th scope="col">Poligono</th>
-                <th scope="col">Localidad</th>
-                <th scope="col">Provincia</th>
-                <th scope="col">Hestarias</th>
+
+                <th scope="col">Comprador</th>
+                <th scope="col">Precio Tonelada</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Finca</th>
+                <th scope="col">Temporada</th>
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody>
-                @forelse ($fincas as $finca)
+                @forelse ($ganancias as $ganancia)
                     <tr>
-                        <th scope="col">{{$finca->parcela}}</th>
-                        <th scope="col">{{$finca->poligono}}</th>
-                        <th scope="col">{{$finca->municipio}}</th>
-                        <th scope="col">{{$finca->provincia}}</th>
-                        <th scope="col">{{$finca->hectarias}}</th>
+                        <th scope="col">{{$ganancia->comprador}}</th>
+                        <th scope="col">{{$ganancia->precio_tonelada}}</th>
+                        <th scope="col">{{$ganancia->cantidad}}</th>
+                        <th scope="col">{{$ganancia->fecha}}</th>
+                        <th scope="col">{{$ganancia->finca->identificadores}}</th>
+                        <th scope="col">{{$ganancia->temporada->comiezo_final_temporada}}</th>
                         <th scope="col">
-                            <a class='btn' href="{{ route('finca.show', $finca->id) }}"><i class="ri-eye-line"></i></a>
-                            <a class="btn" href="{{ route('finca.edit', $finca->id) }}"><i class="ri-pencil-line"></i></a>
-                            @if ($finca->deleted_at)
-                                <a class="btn" href="{{ route('finca.restablecer', $finca->id) }}"><i class="ri-arrow-up-circle-fill"></i></a>
+                            <a class='btn' href="{{ route('ganancia.show', $ganancia->id) }}"><i class="ri-eye-line"></i></a>
+                            <a class="btn" href="{{ route('ganancia.edit', $ganancia->id) }}"><i class="ri-pencil-line"></i></a>
+                            @if ($ganancia->deleted_at)
+                                <a class="btn" href="{{ route('ganancia.restablecer', $ganancia->id) }}"><i class="ri-arrow-up-circle-fill"></i></a>
                             @else
                                 <button class='btn' onclick="window.modal.showModal();"><i class="ri-arrow-down-circle-fill"></i></button>
                             @endif
@@ -46,7 +50,7 @@
                         </th>
                     </tr>
                     <dialog id="modal">
-                        {!! Form::open(['method'=>'delete','url'=>route('finca.destroy', $finca->id)]) !!}
+                        {!! Form::open(['method'=>'delete','url'=>route('ganancia.destroy', $ganancia->id)]) !!}
                             <p>Se va a eliminar el registro</p>
                             {!! Form::submit('Acceptar', ['onclick'=>'window.modal.close();']) !!}
                             <button onclick="window.modal.close();">Cancelar</button>
@@ -59,10 +63,10 @@
                 @endforelse
             </tbody>
           </table>
-          <div class="text-center">{{$fincas->links()}}</div>
+          <div class="text-center">{{$ganancias->links()}}</div>
     </div>
     <div class="card-footer">
-        <a href="{{ route('finca.create') }}" class="btn btn-secondary"><i class="ri-file-add-line"></i> Nuevo</a>
+        <a href="{{ route('ganancia.create') }}" class="btn btn-secondary"><i class="ri-file-add-line"></i> Nuevo</a>
     </div>
 
   </div>

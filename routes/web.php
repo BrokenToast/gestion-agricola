@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/finca/restablecer/{id}', [App\Http\Controllers\FincaController::class, 'restablecer'])->name('finca.restablecer');
 
     // Resource
+    Route::resource('ganancia', App\Http\Controllers\GananciaController::class);
     Route::resource('temporada', App\Http\Controllers\TemporadaController::class);
     Route::resource('finca', App\Http\Controllers\FincaController::class);
 });
