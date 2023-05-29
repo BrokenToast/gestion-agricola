@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('fincas', function (Blueprint $table) {
             $table->id();
+            $table->integer('parcela');
+            $table->integer('poligono');
+            $table->string('municipio')->max(255);
+            $table->string('provincia')->max(255);
+            $table->unsignedBigInteger('usuario_id');
+            $table->foreign('usuario_id')->references('id')->on('usuarios');
+            $table->decimal('hectarias');
             $table->timestamps();
+            $table->softDeletes();;
         });
     }
 

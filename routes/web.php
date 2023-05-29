@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,14 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.app');
+Auth::routes();
+
+Route::middleware('auth')->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/', function () {
+        return view('layouts.app');
+    });
+
+
+    //Finca
+    Route::get('/finca/restablecer/{id}', [App\Http\Controllers\FincaController::class, 'restablecer'])->name('finca.restablecer');
+    Route::get('/perfil', [App\Http\Controllers\UsuarioController::class, 'edit'])->name('perfil');
+    // Resource
+    Route::resource('ganancia', App\Http\Controllers\GananciaController::class);
+    Route::resource('gasto', App\Http\Controllers\GastoController::class);
+    Route::resource('temporada', App\Http\Controllers\TemporadaController::class);
+    Route::resource('finca', App\Http\Controllers\FincaController::class);
 });
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -11,10 +11,9 @@ services:
       - 9003:9003
     cpu_count: 3
   mysql:
-    image: mysql
-    tty: true
+    image: mariadb
     environment:
-      - MYSQL_ROOT_PASSWORD=paso1234
+      - MARIADB_ROOT_PASSWORD=paso1234
     ports:
       - 3306:3306
 volumes:

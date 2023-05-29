@@ -17,14 +17,19 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        <header>
-            @include('layouts.header')
-        </header>
+        <div id="mensaje">
+            @include('layouts.mensaje')
+        </div>
+        <aside>
+            @include('layouts.aside')
+        </aside>
         <main>
-
+            @yield('main')
         </main>
         <footer>
             @include('layouts.footer')

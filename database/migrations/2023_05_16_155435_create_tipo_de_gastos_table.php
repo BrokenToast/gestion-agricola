@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('tipo_de_gastos', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre')->max(255);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
