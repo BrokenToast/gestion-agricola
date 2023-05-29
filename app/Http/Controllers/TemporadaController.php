@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTemporadaRequest;
 use App\Http\Requests\UpdateTemporadaRequest;
 use App\Models\Temporada;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -17,9 +18,9 @@ class TemporadaController extends Controller
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function index(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+    public function index(Request $request): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
-        $temporadas = Temporada::all();
+        $temporadas = Temporada::filtrarFechaInicio($request->fecha_inicio)->paginate();
         return view('temporada.index', compact('temporadas'));
     }
 
@@ -70,7 +71,9 @@ class TemporadaController extends Controller
      */
     public function show(Temporada $temporada): \Illuminate\Contracts\View\View
     {
-        //
+        $gastos = $temporada->gasto->paginate();
+        $ganancias = $temporada->ganancia->paginate();
+        return view('temporada.show', compact('gastos', 'ganancias'));
     }
 
     /**

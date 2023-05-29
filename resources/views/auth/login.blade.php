@@ -57,12 +57,6 @@
                                 <button type="submit" class="btn btn-primary fs-5">
                                     {{ __('Login') }}
                                 </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link " href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
                             </div>
                         </div>
                         <div class="row mt-1 col-12">

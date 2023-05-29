@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -74,8 +75,19 @@ class Temporada extends Model
     {
         return Attribute::make(
             get: function () {
-                return $this->fecha_inicio->format('Y-m-d') . ' - ' . $this->fecha_fin->format('Y-m-d') . (($this->fecha_fin) ? '(Finalizada)' : '(No finalizada)');
+                if ($this->fecha_fin) {
+                    return $this->fecha_inicio->format('Y-m-d') . ' - ' . $this->fecha_fin->format('Y-m-d') . '(Finalizada)';
+                } else {
+                    return $this->fecha_inicio->format('Y-m-d') . '(No finalizada)';
+                }
             },
         );
+    }
+    //==========================================
+    //= Scopes
+    //==========================================
+    public function scopeFiltrarFechaInicio(Builder $query, $fecha)
+    {
+        $query->where('fecha_inicio', 'like', '%' . $fecha . '%');
     }
 }

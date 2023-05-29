@@ -6,6 +6,13 @@
         Temporadas
     </div>
     <div class="card-body">
+        <div class="d-felx">
+            {!! Form::open(['method'=>'GET','url'=>route('temporada.index')]) !!}
+                {!! Form::label('fecha_inicio', 'Fecha Inicio', ['class'=>'form-label']) !!}
+                {!! Form::date('fecha_inicio',null, ['id'=>'fecha_inicio','class'=>'form-date']) !!}
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            {!! Form::close() !!}
+        </div>
         <table class="table">
             <thead>
               <tr>
@@ -43,6 +50,10 @@
                 @endforelse
             </tbody>
           </table>
+          <div class="d-flex justify-content-center">
+            {{$temporadas->links()}}
+          </div>
+
     </div>
     <div class="card-footer">
         <a href="{{ route('temporada.create') }}" class="btn btn-secondary"><i class="ri-file-add-line"></i> Nuevo</a>

@@ -22,7 +22,7 @@ class GananciaController extends Controller
      */
     public function index(Request $request): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
-        $ganancias = ganancia::paginate();
+        $ganancias = Ganancia::filtrarDescripcion($request->comprador)->paginate();
         return view('ganancia.index', compact('ganancias'));
     }
 
@@ -65,20 +65,6 @@ class GananciaController extends Controller
     }
 
     /**
-     * show
-     *
-     * @param ganancia $ganancia
-     *
-     * Display the specified resource.
-     *
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function show(Ganancia $ganancia): \Illuminate\Contracts\View\View
-    {
-        //
-    }
-
-    /**
      * edit
      *
      * Show the form for editing the specified resource.
@@ -87,9 +73,12 @@ class GananciaController extends Controller
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function edit(Ganancia $ganancia): \Illuminate\Contracts\View\View
+    public function edit($ganancia): \Illuminate\Contracts\View\View
     {
-        return view('ganancia.edit', compact('ganancia'));
+        $ganancia = Ganancia::findOrFail($ganancia);
+        $fincas = Finca::all()->pluck('identificadores', 'id')->toArray();
+        $temporadas = Temporada::all()->pluck('comiezo_final_temporada', 'id');
+        return view('ganancia.edit', compact('ganancia', 'fincas', 'temporadas'));
     }
 
     /**
@@ -102,11 +91,11 @@ class GananciaController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateGananciaRequest $request, Ganancia $ganancia): \Illuminate\Http\RedirectResponse
+    public function update(UpdateGananciaRequest $request, $ganancia): \Illuminate\Http\RedirectResponse
     {
         try {
             DB::beginTransaction();
-            $ganancia->update($request->validated());
+            Ganancia::findOrFail($ganancia)->update($request->validated());
             DB::commit();
             return redirect()->route('ganancia.index')->with('success', 'Se a editado corectamente');
         } catch (\Exception $th) {
@@ -126,11 +115,11 @@ class GananciaController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Ganancia $ganancia): \Illuminate\Http\RedirectResponse
+    public function destroy($ganancia): \Illuminate\Http\RedirectResponse
     {
         try {
             DB::beginTransaction();
-            $ganancia->delete();
+            Ganancia::findOrFail($ganancia)->delete();
             DB::commit();
             return redirect()->route('ganancia.index')->with('success', 'Se a eliminar corectamente');
         } catch (\Exception $th) {

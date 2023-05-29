@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
-    <div id="app">
+    <div id="appAuth">
         <main id="auth">
             @yield('auth')
         </main>

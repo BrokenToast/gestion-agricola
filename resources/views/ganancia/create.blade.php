@@ -3,7 +3,7 @@
 @section('main')
 <div class="card">
     <div class="card-header">
-        Finca create
+        Create una ganancia.
     </div>
     <div class="card-body col-12">
         {!! Form::open(['method'=>'POST','url'=>route('ganancia.store')]) !!}
@@ -26,7 +26,7 @@
             @enderror
         </div>
         <div>
-            {!! Form::label('cantidad','Cantidad', ['class'=>'form-label']) !!}
+            {!! Form::label('cantidad','Cantidad(Toneladas)', ['class'=>'form-label']) !!}
             {!! Form::number('cantidad', old('cantidad'), ['class'=>'form-number','step'=>'0.1']) !!}
             @error('cantidad')
                 <span class="text-danger" role="alert">

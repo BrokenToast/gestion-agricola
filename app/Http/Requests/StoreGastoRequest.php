@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Finca;
+use App\Models\Temporada;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreGastoRequest extends FormRequest
 {
@@ -11,7 +14,7 @@ class StoreGastoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +25,12 @@ class StoreGastoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'descripcion' => ['string', 'max:600'],
+            'cantidad' => ['numeric'],
+            'fecha' => ['date'],
+            'finca_id' => ['integer'],
+            'temporada_id' => ['integer'],
+            'tipo_de_gasto_id' => ['integer'],
         ];
     }
 }

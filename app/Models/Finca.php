@@ -78,9 +78,9 @@ class Finca extends Model
      *
      * @return
      */
-    public function gastos()
+    public function gasto()
     {
-        return $this->hasOne(Gastos::class);
+        return $this->hasOne(Gasto::class);
     }
     //==========================================
     //= Scopes
@@ -91,8 +91,12 @@ class Finca extends Model
             $query->onlyTrashed();
         }
     }
+    public function scopeFiltrarPorCampo(Builder $query, string|null $campo, string|null $texto)
+    {
+        $query->where($campo, $texto);
+    }
     //==========================================
-    //= Accesors
+    //= Accesors Y mutators
     //==========================================
     protected function identificadores(): Attribute
     {

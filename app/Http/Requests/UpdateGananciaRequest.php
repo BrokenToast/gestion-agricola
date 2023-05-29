@@ -11,7 +11,7 @@ class UpdateGananciaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class UpdateGananciaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'comprador' => ['string', 'max:255', 'nullable'],
+            'precio_tonelada' => ['numeric', 'nullable'],
+            'cantidad' => ['numeric', 'nullable'],
+            'fecha' => ['date', 'nullable'],
+            'finca_id' => ['integer', 'nullable'],
+            'temporada_id' => ['integer', 'nullable']
         ];
     }
 }

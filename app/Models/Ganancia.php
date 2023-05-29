@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -57,5 +58,12 @@ class Ganancia extends Model
     public function temporada()
     {
         return $this->belongsTo(Temporada::class);
+    }
+    //==========================================
+    //= Scopes
+    //==========================================
+    public function scopeFiltrarDescripcion(Builder $query, string|null $comprador)
+    {
+        $query->where('comprador', 'like', '%' . $comprador . '%');
     }
 }

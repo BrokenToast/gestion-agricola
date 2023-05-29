@@ -25,9 +25,10 @@ Route::middleware('auth')->group(function () {
 
     //Finca
     Route::get('/finca/restablecer/{id}', [App\Http\Controllers\FincaController::class, 'restablecer'])->name('finca.restablecer');
-
+    Route::get('/perfil', [App\Http\Controllers\UsuarioController::class, 'edit'])->name('perfil');
     // Resource
     Route::resource('ganancia', App\Http\Controllers\GananciaController::class);
+    Route::resource('gasto', App\Http\Controllers\GastoController::class);
     Route::resource('temporada', App\Http\Controllers\TemporadaController::class);
     Route::resource('finca', App\Http\Controllers\FincaController::class);
 });

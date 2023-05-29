@@ -9,7 +9,7 @@
               {{Auth::user()->nombre}}
             </a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Configuración</a></li>
+                {{-- <li><a class="dropdown-item" href="#">Configuración</a></li> --}}
                 <hr>
                 <li>
                     {!! Form::open(['method'=>'POST','url'=>route('logout'), 'class'=>'dropdown-item']) !!}
@@ -21,7 +21,7 @@
         <li class="primer-nivel"><a href="{{ route('temporada.index') }}">Temporadas</a></li>
         <li class="primer-nivel"><a href="{{ route('finca.index') }}">Finca</a></li>
         <li class="primer-nivel">Precios</li>
-        <li class="primer-nivel">Ganancias</li>
-        <li class="primer-nivel">Gastos</li>
+        <li class="primer-nivel"><a href="{{ route('ganancia.index') }}">Ganancias</a></li>
+        <li class="primer-nivel"><a href="{{ route('gasto.index') }}">Gastos</a></li>
     </ul>
 </nav>

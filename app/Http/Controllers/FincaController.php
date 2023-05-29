@@ -18,9 +18,10 @@ class FincaController extends Controller
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function index(Request $request): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+    public function index(Request $request): \Illuminate\Contracts\View\View
     {
-        $fincas = Finca::filtrarPorBaja($request->baja)->paginate();
+        $fincas = Finca::filtrarPorCampo($request->campo, $request->busqueda)->paginate();
+
         return view('finca.index', compact('fincas'));
     }
 
@@ -31,7 +32,7 @@ class FincaController extends Controller
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function create(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+    public function create(): \Illuminate\Contracts\View\View
     {
         return view('finca.create');
     }
@@ -71,9 +72,11 @@ class FincaController extends Controller
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function show(Finca $Finca): \Illuminate\Contracts\View\View
+    public function show(Finca $finca): \Illuminate\Contracts\View\View
     {
-        //
+        $gastos = $finca->gasto->paginate();
+        $ganancias = $finca->ganancia->paginate();
+        return view('finca.show', compact('gastos', 'ganancias'));
     }
 
     /**
@@ -138,7 +141,14 @@ class FincaController extends Controller
             return redirect()->back()->with('error', 'Error al eliminar');
         }
     }
-    public function restablecer($finca)
+    /**
+     * restablecer
+     *
+     * @param mixed $finca
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function restablecer($finca): \Illuminate\Http\RedirectResponse
     {
         try {
             DB::beginTransaction();

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('gastos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('tipo_id');
-            $table->foreign('tipo_id')->references('id')->on('tipo_de_gastos');
+            $table->unsignedBigInteger('tipo_de_gasto_id');
+            $table->foreign('tipo_de_gasto_id')->references('id')->on('tipo_de_gastos');
             $table->text('descripcion')->nullable();
             $table->decimal('cantidad');
             $table->date('fecha');

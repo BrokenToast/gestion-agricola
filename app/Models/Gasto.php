@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,6 +18,7 @@ class Gasto extends Model
         'descripcion',
         'cantidad',
         'fecha',
+        'tipo_de_gasto_id',
         'finca_id',
         'temporada_id',
     ];
@@ -65,5 +67,12 @@ class Gasto extends Model
     public function tipoDeGasto(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(TipoDeGasto::class);
+    }
+    //==========================================
+    //= Scope
+    //==========================================
+    public function scopeFiltrarPorDescripcion(Builder $query, $descripcion)
+    {
+        $query->where('descripcion', 'like', '%' . $descripcion . '%');
     }
 }

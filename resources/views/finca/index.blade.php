@@ -7,10 +7,12 @@
     </div>
     <div class="card-body">
         <div>
-            {!! Form::open(['method'=>'get']) !!}
-            {!! Form::text('busqueda_num_parcela', null, ['class'=>'form-text','placeholder'=>'Buscar por campo']) !!}
-
-            {!! Form::submit('Buscar', ['class'=>'btn btn-primary']) !!}
+            {!! Form::open(['method'=>'get','class'=>'d-flex align-items-center']) !!}
+                {!! Form::select('campo',['0'=>'Campos','parcela'=>'Parcela','poligono'=>'Poligono','localidad'=>'Localidad','provincia'=>'Provincia'], 0, ['class'=>'form-select w-25 m-2']) !!}
+                {!! Form::text('busqueda', null, ['class'=>'form-text m-2','placeholder'=>'Buscar por campo']) !!}
+                {!! Form::checkbox('baja', 1, null, ['id'=>'baja m-2']) !!}
+                {!! Form::label('baja', 'Baja', ['class'=>'form-label']) !!}
+                {!! Form::submit('Buscar', ['class'=>'btn btn-primary m-2']) !!}
             {!! Form::close() !!}
         </div>
         <hr>
@@ -59,11 +61,12 @@
                 @endforelse
             </tbody>
           </table>
-          <div class="text-center">{{$fincas->links()}}</div>
+          <div class="d-flex justify-content-center">
+            {{$fincas->links()}}
+          </div>
     </div>
     <div class="card-footer">
         <a href="{{ route('finca.create') }}" class="btn btn-secondary"><i class="ri-file-add-line"></i> Nuevo</a>
     </div>
-
   </div>
 @endsection
